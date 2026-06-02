@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://customwheel.github.io/sitemap.xml
