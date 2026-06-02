@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us — CustomWheel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <style>
+    .legal-page { padding: 120px 0 80px; min-height: 80vh; }
+    .legal-card { background: var(--surface); border-radius: var(--radius); padding: 48px; border: 2px solid var(--border); box-shadow: var(--shadow); }
+    .legal-card h1 { font-family: var(--font-display); font-size: 2.8rem; margin-bottom: 8px; color: var(--text); }
+    .legal-card h1 span { color: var(--primary); }
+    .legal-meta { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 32px; font-weight: 600; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 24px; }
+    .contact-info p { color: var(--text-muted); margin-bottom: 16px; font-size: 1rem; }
+    .contact-method { display: flex; align-items: center; gap: 12px; margin-top: 24px; }
+    .contact-icon { font-size: 2rem; }
+    .contact-details h4 { font-family: var(--font-display); color: var(--secondary); font-size: 1rem; }
+    .contact-details a { color: var(--primary); font-weight: 700; text-decoration: none; }
+    .contact-details a:hover { text-decoration: underline; }
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-weight: 700; font-size: 0.9rem; color: var(--text); }
+    .form-group input, .form-group textarea {
+      padding: 12px 16px; border-radius: var(--radius-sm); border: 2px solid var(--border);
+      font-family: var(--font-body); outline: none; background: var(--bg);
+    }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--primary); }
+    @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body class="dots-bg">
+
+<!-- ===== HEADER (Component) ===== -->
+<script src="js/header.js" defer></script>
+
+<main class="legal-page">
+  <div class="container">
+    <div class="legal-card">
+      <h1>Get In <span>Touch</span></h1>
+      <div class="legal-meta">Have questions, feedback, or custom feature requests?</div>
+      
+      <div class="contact-grid">
+        <div class="contact-info">
+          <p>We are dedicated to maintaining CustomWheel as the premier interactive tool for teachers, marketers, and developers alike. If you experience unexpected script anomalies, want to explore branding integrations, or just want to send a note of appreciation, we are ready to listen.</p>
+          
+          <div class="contact-method">
+            <span class="contact-icon">✉️</span>
+            <div class="contact-details">
+              <h4>Direct Email Support</h4>
+              <a href="mailto:meraalshah447@gmail.com">meraalshah447@gmail.com</a>
+            </div>
+          </div>
+          
+          <div class="contact-method">
+            <span class="contact-icon">🛠️</span>
+            <div class="contact-details">
+              <h4>Open Source Inquiries</h4>
+              <p style="margin: 0; font-size: 0.9rem;">Submit pull requests or issues directly via our public deployment layout.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <form class="contact-form" action="https://formspree.io/f/meraalshah447@gmail.com" method="POST">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" required placeholder="Meeral" />
+            </div>
+            <div class="form-group">
+              <label for="email">Your Email Address</label>
+              <input type="email" id="email" name="email" required placeholder="you@example.com" />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" required placeholder="How can we help optimize your spin layouts?"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="align-self: flex-start; border: none;">✉️ Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ===== FOOTER (Component) ===== -->
+<script src="js/footer.js" defer></script>
+
+</body>
+</html>
