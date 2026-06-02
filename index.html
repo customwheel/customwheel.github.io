@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ===== SEO META TAGS ===== -->
+  <title>Spin the Wheel — Free Online Random Wheel Spinner | CustomWheel</title>
+  <meta name="description" content="Spin the Wheel for free! CustomWheel is the best free online random wheel spinner for classrooms, giveaways, prizes, and decisions. Customize your wheel, add entries, and spin away!" />
+  <meta name="keywords" content="spin the wheel, random wheel, wheel spinner, classroom spinner, random student picker, free spin wheel, giveaway wheel, prize wheel, lucky spin, raffle wheel, digital wheel spinner, spin wheel game" />
+  <meta name="author" content="CustomWheel" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://customwheel.github.io/" />
+
+  <!-- ===== OPEN GRAPH ===== -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://customwheel.github.io/" />
+  <meta property="og:title" content="Spin the Wheel — Free Online Random Wheel Spinner | CustomWheel" />
+  <meta property="og:description" content="The best free online spin the wheel tool. Perfect for classroom pickers, giveaways, prize wheels, and decision making. Fully customizable and fun!" />
+  <meta property="og:image" content="https://customwheel.github.io/images/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Spin the Wheel — Free Online Random Wheel Spinner" />
+  <meta name="twitter:description" content="Free customizable spin the wheel tool for classrooms, giveaways, and fun decisions." />
+
+  <!-- ===== SCHEMA MARKUP ===== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "CustomWheel — Spin the Wheel",
+    "url": "https://customwheel.github.io/",
+    "description": "Free online spin the wheel tool for classrooms, giveaways, random picks, and prize draws.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Custom wheel entries",
+      "Multiple wheel types",
+      "Classroom random student picker",
+      "Giveaway and prize wheels",
+      "Interactive spin animation",
+      "Mobile compatible"
+    ],
+    "author": {
+      "@type": "Organization",
+      "name": "CustomWheel",
+      "url": "https://customwheel.github.io"
+    },
+    "screenshot": "https://customwheel.github.io/images/screenshot.png"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is CustomWheel free to use?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes! CustomWheel is 100% free with no sign-up required. Just visit the site, customize your wheel, and spin." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use this as a classroom spinner?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. CustomWheel is perfect for teachers as a random student picker, classroom spinner, and interactive lesson tool." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I add my own entries to the wheel?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes! You can add, remove, and customize all wheel entries. Choose from presets or build your own custom wheel." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the wheel spin truly random?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. CustomWheel uses a cryptographically-inspired random algorithm to ensure every spin is truly fair and unpredictable." }
+      }
+    ]
+  }
+  </script>
+
+  <!-- ===== FONTS & STYLES ===== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@400;500;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Favicon inline SVG -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><circle cx='18' cy='18' r='18' fill='%23FF4D6D'/><text x='18' y='24' font-size='20' text-anchor='middle'>🎡</text></svg>" />
+</head>
+<body>
+
+<!-- ===== HEADER (Component) ===== -->
+<script src="js/header.js" defer></script>
+
+<!-- ===== CONFETTI CONTAINER ===== -->
+<div id="confettiContainer" aria-hidden="true"></div>
+
+<!-- ===== RESULT MODAL ===== -->
+<div id="resultOverlay" class="result-overlay" role="dialog" aria-modal="true" aria-label="Spin result">
+  <div class="result-card">
+    <div class="result-emoji">🎉</div>
+    <div class="result-label">We have a winner!</div>
+    <div class="result-winner" id="resultWinner">—</div>
+    <div class="result-actions">
+      <button class="btn btn-secondary" id="resultCloseBtn">Close</button>
+      <button class="btn btn-primary" id="resultSpinAgainBtn">
+        🔄 Spin Again
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     HERO SECTION — Full App
+     ============================================================ -->
+<section id="hero" aria-label="Spin the Wheel Application">
+  <div class="container hero-inner">
+
+    <!-- LEFT: Content -->
+    <div class="hero-content">
+      <div class="hero-badge">
+        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FB5607'><path d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/></svg>" alt="star" />
+        100% Free — No Sign-up Needed
+      </div>
+
+      <h1 class="hero-title">
+        <span class="line1">Spin the</span><br>
+        <span class="line2">Wheel &amp; Pick</span><br>
+        <span class="line3">A Random Winner</span>
+      </h1>
+      <p class="hero-desc">The most fun, free, and fully customizable online wheel spinner. Perfect for classrooms, giveaways, prizes, party games, and tough decisions. Add your entries and let fate decide!</p>
+
+      <div class="hero-btns">
+        <a href="#hero" class="btn btn-primary" onclick="WheelEngine.spin();return false;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Spin the Wheel!
+        </a>
+        <a href="#how-it-works" class="btn btn-secondary">How It Works</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <strong><span class="count-up" data-target="2400000" data-suffix="+">0</span></strong>
+          <span>Spins Made</span>
+        </div>
+        <div class="hero-stat">
+          <strong><span class="count-up" data-target="7" data-suffix="">0</span>+</strong>
+          <span>Wheel Types</span>
+        </div>
+        <div class="hero-stat">
+          <strong>100%</strong>
+          <span>Free Forever</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Wheel App -->
+    <div class="hero-wheel-area">
+      <!-- Preset Tabs -->
+      <div class="wheel-type-tabs">
+        <button class="wtab active" data-preset="custom">🎯 Custom</button>
+        <button class="wtab" data-preset="classroom">📚 Class</button>
+        <button class="wtab" data-preset="yesno">❓ Yes/No</button>
+        <button class="wtab" data-preset="giveaway">🎁 Giveaway</button>
+        <button class="wtab" data-preset="numbers">🔢 Numbers</button>
+        <button class="wtab" data-preset="decisions">🤔 Decide</button>
+      </div>
+
+      <!-- The Wheel -->
+      <div class="wheel-wrap">
+        <div class="wheel-pointer" aria-hidden="true"></div>
+        <canvas id="mainWheel" width="420" height="420" role="img" aria-label="Spin the wheel canvas — click to spin"></canvas>
+      </div>
+
+      <!-- Spin Buttons -->
+      <div class="wheel-controls">
+        <button class="btn btn-primary" id="spinBtn">🎯 Spin!</button>
+        <button class="btn btn-secondary" id="paletteBtn" title="Change color palette">🎨 Colors</button>
+      </div>
+
+      <!-- Entry Editor -->
+      <div class="wheel-editor">
+        <h4>✏️ Customize Entries</h4>
+        <ul class="entry-list" id="entryList"></ul>
+        <div class="add-entry-row">
+          <input type="text" id="addEntryInput" placeholder="Add entry… (press Enter)" maxlength="40" />
+          <button id="addEntryBtn">+ Add</button>
+        </div>
+      </div>
+
+      <!-- Spin History -->
+      <div class="wheel-editor" id="historyBox" style="display:none">
+        <h4>🕓 Spin History</h4>
+        <div id="spinHistory"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     FEATURES SECTION
+     ============================================================ -->
+<section id="features" aria-label="Features">
+  <div class="container">
+    <div class="features-header reveal">
+      <div class="section-tag">✨ Why CustomWheel?</div>
+      <h2 class="section-title">Everything You Need for the <span>Perfect Spin</span></h2>
+      <p class="section-sub" style="margin:14px auto 0;">A powerful, beautiful, and completely free random wheel generator packed with tools for every occasion.</p>
+    </div>
+
+    <div class="features-grid">
+      <!-- Feature 1 -->
+      <div class="feature-card reveal" data-delay="0">
+        <img class="feature-img" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='30' fill='%23FFF0F6'/><text x='32' y='42' font-size='28' text-anchor='middle'>🎨</text></svg>" alt="Custom wheel" />
+        <h3>Fully Customizable</h3>
+        <p>Add, edit, or remove any number of entries. Change color palettes, themes, and styles to match your brand or event.</p>
+      </div>
+      <!-- Feature 2 -->
+      <div class="feature-card reveal" data-delay="80">
+        <img class="feature-img" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='30' fill='%23F0EEFF'/><text x='32' y='42' font-size='28' text-anchor='middle'>⚡</text></svg>" alt="Fast spinner" />
+        <h3>Instant &amp; Smooth</h3>
+        <p>60 FPS silky-smooth spin animation with satisfying physics. Results appear instantly with beautiful confetti celebrations.</p>
+      </div>
+      <!-- Feature 3 -->
+      <div class="feature-card reveal" data-delay="160">
+        <img class="feature-img" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='30' fill='%23F0FFF8'/><text x='32' y='42' font-size='28' text-anchor='middle'>🎓</text></svg>" alt="Classroom spinner" />
+        <h3>Classroom Ready</h3>
+        <p>Built for teachers. Use as a random student picker, quiz spinner, or engagement tool. Works on any projector or smartboard.</p>
+      </div>
+      <!-- Feature 4 -->
+      <div class="feature-card reveal" data-delay="240">
+        <img class="feature-img" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='30' fill='%23FFFBF0'/><text x='32' y='42' font-size='28' text-anchor='middle'>📱</text></svg>" alt="Mobile compatible" />
+        <h3>Mobile Friendly</h3>
+        <p>Works perfectly on phones, tablets, and desktops. Touch-optimized controls make spinning fun on any device.</p>
+      </div>
+      <!-- Feature 5 -->
+      <div class="feature-card reveal" data-delay="320">
+        <img class="feature-img" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='30' fill='%23FFF0F6'/><text x='32' y='42' font-size='28' text-anchor='middle'>🎰</text></svg>" alt="Multiple wheel types" />
+        <h3>7+ Wheel Types</h3>
+        <p>Choose from Custom Wheels, Classroom Pickers, Giveaway Wheels, Yes/No Deciders, Number Wheels, and more.</p>
+      </div>
+      <!-- Feature 6 -->
+      <div class="feature-card reveal" data-delay="400">
+        <img class="feature-img" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='30' fill='%23F0EEFF'/><text x='32' y='42' font-size='28' text-anchor='middle'>🔒</text></svg>" alt="Free and private" />
+        <h3>Free &amp; Private</h3>
+        <p>No account, no subscription, no data stored. Your wheel entries stay on your device. Completely free forever.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     WHEEL TYPES SECTION
+     ============================================================ -->
+<section id="wheel-types" aria-label="Wheel Types">
+  <div class="container">
+    <div class="wheel-types-header reveal">
+      <div class="section-tag">🎡 Wheel Library</div>
+      <h2 class="section-title">Choose Your <span>Perfect Wheel</span></h2>
+      <p class="section-sub" style="margin:14px auto 0;">From simple yes/no decisions to complex classroom pickers and raffle draws — we have a wheel for every moment.</p>
+    </div>
+
+    <div class="wheel-types-grid">
+      <div class="wtype-card reveal" data-delay="0">
+        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'><circle cx='40' cy='40' r='38' fill='%23FFF0F6'/><text x='40' y='52' font-size='36' text-anchor='middle'>🎯</text></svg>" alt="Custom Wheel" />
+        <h4>Custom Wheel</h4>
+        <p>Add any entries you like. Fully personalized for your use.</p>
+        <span class="wtype-badge badge-popular">Most Popular</span>
+      </div>
+      <div class="wtype-card reveal" data-delay="60">
+        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'><circle cx='40' cy='40' r='38' fill='%23F0EEFF'/><text x='40' y='52' font-size='36' text-anchor='middle'>📚</text></svg>" alt="Classroom Spinner" />
+        <h4>Classroom Spinner</h4>
+        <p>Randomly pick students. Perfect for teachers and educators.</p>
+        <span class="wtype-badge badge-edu">For Teachers</span>
+      </div>
+      <div class="wtype-card reveal" data-delay="120">
+        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'><circle cx='40' cy='40' r='38' fill='%23FFFBF0'/><text x='40' y='52' font-size='36' text-anchor='middle'>🎁</text></svg>" alt="Giveaway Wheel" />
+        <h4>Giveaway Wheel</h4>
+        <p>Run fair and exciting social media giveaways and raffles.</p>
+        <span class="wtype-badge badge-new">Trending</span>
+      </div>
+      <div class="wtype-card reveal" data-delay="180">
+        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'><circle cx='40' cy='40' r='38' fill='%23F0FFF8'/><text x='40' y='52' font-size='36' text-anchor='middle'>🏆</text></svg>" alt="Prize Wheel" />
+        <h4>Prize Wheel</h4>
+        <p>Create exciting prize draws for events, contests &amp; competitions.</p>
+        <span class="wtype-badge badge-popular">Fan Favorite</span>
+      </div>
+      <div class="wtype-card reveal" data-delay="240">
+        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'><circle cx='40' cy='40' r='38' fill='%23FFF0F6'/><text x='40' y='52' font-size='36' text-anchor='middle'>❓</text></svg>" alt="Yes No Wheel" />
+        <h4>Yes / No Wheel</h4>
+        <p>Can't decide? Let the wheel answer your yes or no questions.</p>
+        <span class="wtype-badge badge-free">Quick Use</span>
+      </div>
+      <div class="wtype-card reveal" data-delay="300">
+        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'><circle cx='40' cy='40' r='38' fill='%23F0EEFF'/><text x='40' y='52' font-size='36' text-anchor='middle'>🔢</text></svg>" alt="Number Wheel" />
+        <h4>Number Wheel</h4>
+        <p>Pick random numbers for lotteries, games, seat assignments &amp; more.</p>
+        <span class="wtype-badge badge-free">Free</span>
+      </div>
+      <div class="wtype-card reveal" data-delay="360">
+        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'><circle cx='40' cy='40' r='38' fill='%23FFFBF0'/><text x='40' y='52' font-size='36' text-anchor='middle'>😈</text></svg>" alt="Truth or Dare Wheel" />
+        <h4>Truth or Dare</h4>
+        <p>Spice up any party with a random truth or dare spinner wheel.</p>
+        <span class="wtype-badge badge-new">Party Mode</span>
+      </div>
+      <div class="wtype-card reveal" data-delay="420">
+        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'><circle cx='40' cy='40' r='38' fill='%23F0FFF8'/><text x='40' y='52' font-size='36' text-anchor='middle'>🍽️</text></svg>" alt="Food Picker Wheel" />
+        <h4>Food Picker</h4>
+        <p>Settle the "what should we eat?" debate with a random food wheel.</p>
+        <span class="wtype-badge badge-new">New!</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     HOW IT WORKS (with image)
+     ============================================================ -->
+<section id="how-it-works" aria-label="How It Works">
+  <div class="container">
+    <div class="hiw-inner">
+      <!-- Image Side -->
+      <div class="hiw-img-area reveal">
+        <img
+          src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 560 400'><defs><linearGradient id='bg' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23F0EEFF'/><stop offset='1' stop-color='%23FFF0F6'/></linearGradient></defs><rect width='560' height='400' rx='28' fill='url(%23bg)'/><circle cx='280' cy='190' r='140' fill='none' stroke='%23FF4D6D' stroke-width='3' stroke-dasharray='10 6' opacity='0.3'/><circle cx='280' cy='190' r='120' fill='none' stroke='%237B2FBE' stroke-width='2' opacity='0.2'/><path d='M280 70 L310 160 L280 190 L250 160 Z' fill='%23FF4D6D'/><path d='M280 310 L250 220 L280 190 L310 220 Z' fill='%2306D6A0'/><path d='M160 190 L250 160 L280 190 L250 220 Z' fill='%23FF8FA3'/><path d='M400 190 L310 220 L280 190 L310 160 Z' fill='%23118AB2'/><circle cx='280' cy='190' r='32' fill='white' opacity='0.95'/><text x='280' y='197' font-size='18' text-anchor='middle' fill='%237B2FBE' font-weight='bold'>SPIN</text><text x='280' y='360' font-size='16' text-anchor='middle' fill='%236B6B8A'>Interactive Wheel Spinner</text></svg>"
+          alt="How the spin wheel works — interactive diagram"
+          width="560" height="400"
+          style="width:100%;height:auto;"
+        />
+        <div class="hiw-floater f1">
+          <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'><circle cx='14' cy='14' r='14' fill='%23FFBE0B'/><text x='14' y='19' font-size='14' text-anchor='middle'>⚡</text></svg>" alt="" />
+          Instant Results
+        </div>
+        <div class="hiw-floater f2">
+          <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'><circle cx='14' cy='14' r='14' fill='%2306D6A0'/><text x='14' y='19' font-size='14' text-anchor='middle'>🔒</text></svg>" alt="" />
+          100% Fair &amp; Random
+        </div>
+      </div>
+
+      <!-- Steps Side -->
+      <div>
+        <div class="reveal" data-delay="0">
+          <div class="section-tag">📖 Simple Steps</div>
+          <h2 class="section-title">How to Use Your <span>Spin Wheel</span></h2>
+          <p class="section-sub">Get spinning in under 30 seconds. No downloads, no sign-up — just open and spin!</p>
+        </div>
+
+        <div class="hiw-steps" style="margin-top:32px;">
+          <div class="hiw-step reveal" data-delay="80">
+            <div class="step-num s1">1</div>
+            <div>
+              <h4>Choose Your Wheel Type</h4>
+              <p>Pick from 7+ wheel presets — classroom picker, giveaway wheel, yes/no decider, numbers, custom, and more.</p>
+            </div>
+          </div>
+          <div class="hiw-step reveal" data-delay="160">
+            <div class="step-num s2">2</div>
+            <div>
+              <h4>Add Your Custom Entries</h4>
+              <p>Type in names, options, prizes, or any text you like. Add unlimited entries with our simple entry editor.</p>
+            </div>
+          </div>
+          <div class="hiw-step reveal" data-delay="240">
+            <div class="step-num s3">3</div>
+            <div>
+              <h4>Click Spin &amp; Watch the Magic</h4>
+              <p>Hit the big spin button and watch your colorful wheel spin with smooth, real physics-based animation.</p>
+            </div>
+          </div>
+          <div class="hiw-step reveal" data-delay="320">
+            <div class="step-num s4">4</div>
+            <div>
+              <h4>Celebrate the Winner!</h4>
+              <p>The result pops up with a beautiful celebration. Remove the winner or keep spinning as many times as you like.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     USE CASES (with images)
+     ============================================================ -->
+<section id="use-cases" aria-label="Use Cases">
+  <div class="container">
+    <div class="use-cases-header reveal">
+      <div class="section-tag">🌍 Who Uses CustomWheel?</div>
+      <h2 class="section-title">A Wheel for Every <span>Occasion</span></h2>
+      <p class="section-sub" style="margin:14px auto 0;">From kindergarten classrooms to corporate events — everyone loves a good spin!</p>
+    </div>
+
+    <div class="use-cases-grid">
+      <!-- Card 1 -->
+      <div class="usecase-card reveal" data-delay="0">
+        <img
+          class="usecase-img"
+          src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 480 180'><defs><linearGradient id='uc1' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23118AB2'/><stop offset='1' stop-color='%237B2FBE'/></linearGradient></defs><rect width='480' height='180' fill='url(%23uc1)'/><text x='240' y='100' font-size='64' text-anchor='middle' opacity='0.9'>🏫</text><text x='240' y='150' font-size='16' text-anchor='middle' fill='rgba(255,255,255,0.8)'>Classroom &amp; Education</text></svg>"
+          alt="Classroom spinner for teachers"
+        />
+        <div class="usecase-body">
+          <span class="usecase-tag">🏫 Education</span>
+          <h4>Random Student Picker</h4>
+          <p>Teachers use our free classroom spinner wheel to randomly select students for questions, group assignments, and class participation. Fair, fun, and engaging!</p>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="usecase-card reveal" data-delay="100">
+        <img
+          class="usecase-img"
+          src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 480 180'><defs><linearGradient id='uc2' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23FF4D6D'/><stop offset='1' stop-color='%23FB5607'/></linearGradient></defs><rect width='480' height='180' fill='url(%23uc2)'/><text x='240' y='100' font-size='64' text-anchor='middle' opacity='0.9'>🎁</text><text x='240' y='150' font-size='16' text-anchor='middle' fill='rgba(255,255,255,0.8)'>Giveaways &amp; Raffles</text></svg>"
+          alt="Giveaway and raffle wheel"
+        />
+        <div class="usecase-body">
+          <span class="usecase-tag">🎁 Giveaways</span>
+          <h4>Social Media Giveaways</h4>
+          <p>Run transparent and exciting giveaways for your followers. Enter participant names and spin the wheel live on stream for maximum excitement and trust.</p>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="usecase-card reveal" data-delay="200">
+        <img
+          class="usecase-img"
+          src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 480 180'><defs><linearGradient id='uc3' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%2306D6A0'/><stop offset='1' stop-color='%23118AB2'/></linearGradient></defs><rect width='480' height='180' fill='url(%23uc3)'/><text x='240' y='100' font-size='64' text-anchor='middle' opacity='0.9'>🎮</text><text x='240' y='150' font-size='16' text-anchor='middle' fill='rgba(255,255,255,0.8)'>Games &amp; Parties</text></svg>"
+          alt="Party games and fun wheel"
+        />
+        <div class="usecase-body">
+          <span class="usecase-tag">🎮 Games</span>
+          <h4>Party Games &amp; Fun</h4>
+          <p>Add a spin wheel to any party! Use it for truth or dare, choosing games, picking teams, or deciding who buys the next round of drinks.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ABOUT / SEO CONTENT SECTION (with image)
+     ============================================================ -->
+<section id="about-spinner" aria-label="About the Spin Wheel">
+  <div class="container">
+    <div class="about-inner">
+      <div class="about-img-wrap reveal">
+        <img
+          src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 520 420'><defs><linearGradient id='abg' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23F0EEFF'/><stop offset='1' stop-color='%23FFF0F6'/></linearGradient></defs><rect width='520' height='420' rx='28' fill='url(%23abg)'/><circle cx='260' cy='200' r='130' fill='none' stroke='%23FF4D6D' stroke-width='4' opacity='0.15'/><circle cx='260' cy='200' r='90' fill='none' stroke='%237B2FBE' stroke-width='4' opacity='0.15'/><text x='260' y='130' font-size='72' text-anchor='middle'>🎡</text><text x='260' y='270' font-size='22' text-anchor='middle' fill='%237B2FBE' font-weight='bold'>Random Wheel Generator</text><text x='260' y='300' font-size='14' text-anchor='middle' fill='%236B6B8A'>Free • Fast • Fair</text><rect x='80' y='330' width='360' height='48' rx='24' fill='%23FF4D6D' opacity='0.1'/><text x='260' y='360' font-size='16' text-anchor='middle' fill='%23FF4D6D' font-weight='bold'>customwheel.github.io</text></svg>"
+          alt="Free online random wheel spinner — CustomWheel"
+          width="520" height="420"
+          style="width:100%;height:auto;"
+        />
+        <div class="about-shape"></div>
+      </div>
+      <div class="about-content reveal" data-delay="100">
+        <div class="section-tag">ℹ️ About Our Wheel</div>
+        <h2 class="section-title">The Best Free <span>Spin the Wheel</span> Online Tool</h2>
+        <p>CustomWheel is a free online random wheel generator that makes every decision, game, or giveaway more exciting. Whether you need a simple yes/no spinner or a complex prize wheel for hundreds of participants — we've got you covered.</p>
+        <p>Our digital wheel spinner uses a true random algorithm to ensure every spin is fair and unpredictable. No hidden patterns, no bias — pure chance every time. That's why teachers, streamers, event organizers, and families trust CustomWheel.</p>
+        <ul class="about-list">
+          <li>Works in any web browser — no app download required</li>
+          <li>Unlimited custom entries with instant wheel update</li>
+          <li>Multiple color palettes to match any theme or brand</li>
+          <li>Spin history tracking for transparency in giveaways</li>
+          <li>Mobile-optimized for touch screens and tablets</li>
+          <li>No data collection — your entries stay private</li>
+        </ul>
+        <a href="#hero" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Try It Free Now
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CLASSROOM / EDUCATIONAL CONTENT (with image)
+     ============================================================ -->
+<section id="classroom" aria-label="Classroom Spinner for Teachers">
+  <div class="container">
+    <div class="classroom-inner">
+      <div class="classroom-img-area reveal">
+        <img
+          src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 520 400'><defs><linearGradient id='cbg' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23118AB2'/><stop offset='1' stop-color='%234CC9F0'/></linearGradient></defs><rect width='520' height='400' rx='28' fill='url(%23cbg)'/><rect x='60' y='60' width='400' height='240' rx='16' fill='rgba(255,255,255,0.15)'/><text x='260' y='130' font-size='48' text-anchor='middle'>🏫</text><text x='260' y='185' font-size='22' text-anchor='middle' fill='white' font-weight='bold'>Classroom Spinner</text><text x='260' y='215' font-size='13' text-anchor='middle' fill='rgba(255,255,255,0.8)'>Random Student Picker for Teachers</text><text x='140' y='275' font-size='28' text-anchor='middle'>👧</text><text x='260' y='275' font-size='28' text-anchor='middle'>👦</text><text x='380' y='275' font-size='28' text-anchor='middle'>👩</text><text x='140' y='295' font-size='11' text-anchor='middle' fill='rgba(255,255,255,0.8)'>Alice</text><text x='260' y='295' font-size='11' text-anchor='middle' fill='rgba(255,255,255,0.8)'>Bob</text><text x='380' y='295' font-size='11' text-anchor='middle' fill='rgba(255,255,255,0.8)'>Carol</text><text x='260' y='360' font-size='14' text-anchor='middle' fill='rgba(255,255,255,0.7)'>Engaging • Fair • Educational</text></svg>"
+          alt="Classroom spinner — random student picker for teachers"
+          width="520" height="400"
+          style="width:100%;height:auto;"
+        />
+      </div>
+      <div class="classroom-content reveal" data-delay="100">
+        <div class="section-tag">📚 For Educators</div>
+        <h2 class="section-title">The Ultimate <span>Classroom Spinner</span> for Teachers</h2>
+        <p>Our free classroom spinner wheel is the #1 tool for teachers who want to make student selection fun, fair, and engaging. Replace boring alphabetical lists with an exciting random spin that students actually love!</p>
+        <p>Used by over 50,000 teachers worldwide, our interactive spin wheel turns ordinary classroom moments into memorable experiences. No apps to install — just open the browser and go.</p>
+        <div class="classroom-pills">
+          <span class="cpill cpill-1">Random Student Picker</span>
+          <span class="cpill cpill-2">Quiz Game Spinner</span>
+          <span class="cpill cpill-3">Group Maker</span>
+          <span class="cpill cpill-4">Homework Selector</span>
+          <span class="cpill cpill-5">Name Picker</span>
+        </div>
+        <a href="#hero" class="btn btn-primary">Use Classroom Spinner</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     GIVEAWAY SECTION (with image)
+     ============================================================ -->
+<section id="giveaway" aria-label="Giveaway and Prize Wheel">
+  <div class="container">
+    <div class="giveaway-inner">
+      <div class="giveaway-img reveal">
+        <img
+          src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 520 420'><defs><linearGradient id='gbg' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23FF4D6D'/><stop offset='1' stop-color='%23FFBE0B'/></linearGradient></defs><rect width='520' height='420' rx='28' fill='url(%23gbg)'/><circle cx='260' cy='190' r='120' fill='rgba(255,255,255,0.15)'/><text x='260' y='150' font-size='60' text-anchor='middle'>🏆</text><text x='260' y='215' font-size='24' text-anchor='middle' fill='white' font-weight='bold'>Giveaway Wheel</text><text x='260' y='248' font-size='14' text-anchor='middle' fill='rgba(255,255,255,0.85)'>Fair • Transparent • Exciting</text><rect x='100' y='280' width='320' height='50' rx='25' fill='rgba(255,255,255,0.2)'/><text x='260' y='311' font-size='15' text-anchor='middle' fill='white' font-weight='bold'>🎯 Winner Selected!</text><text x='260' y='380' font-size='13' text-anchor='middle' fill='rgba(255,255,255,0.7)'>Free Online Raffle &amp; Prize Wheel</text></svg>"
+          alt="Free giveaway and prize wheel spinner"
+          width="520" height="420"
+          style="width:100%;height:auto;"
+        />
+      </div>
+      <div class="reveal" data-delay="100">
+        <div class="section-tag">🎁 Giveaways &amp; Raffles</div>
+        <h2 class="section-title">Run Transparent <span>Giveaways</span> &amp; Raffles</h2>
+        <p>Whether you're a YouTuber, streamer, small business owner, or event planner — our free giveaway wheel spinner makes it easy to pick winners in a way that your audience can see and trust.</p>
+        <div class="giveaway-features">
+          <div class="gfeature">
+            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><circle cx='18' cy='18' r='18' fill='%23FFF0F6'/><text x='18' y='24' font-size='18' text-anchor='middle'>🎯</text></svg>" alt="" />
+            <div>
+              <h5>Add All Participants</h5>
+              <p>Paste in a list of names from your comments, DMs, or spreadsheet. The wheel handles hundreds of entries.</p>
+            </div>
+          </div>
+          <div class="gfeature">
+            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><circle cx='18' cy='18' r='18' fill='%23F0EEFF'/><text x='18' y='24' font-size='18' text-anchor='middle'>📺</text></svg>" alt="" />
+            <div>
+              <h5>Spin Live On Stream</h5>
+              <p>Share your screen and spin the wheel live. Your viewers see the full, unedited result for complete transparency.</p>
+            </div>
+          </div>
+          <div class="gfeature">
+            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><circle cx='18' cy='18' r='18' fill='%23F0FFF8'/><text x='18' y='24' font-size='18' text-anchor='middle'>✅</text></svg>" alt="" />
+            <div>
+              <h5>Fair Random Selection</h5>
+              <p>Every participant has an equal chance. Our random wheel generator is provably fair with no bias.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA BANNER
+     ============================================================ -->
+<section id="cta" aria-label="Call to action">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-tag" style="background:rgba(255,255,255,0.2);color:#fff;border:none;">🚀 Get Started Free</div>
+      <h2>Ready to <span style="color:var(--accent1);">Spin the Wheel?</span></h2>
+      <p>Join millions of teachers, streamers, and everyday decision-makers. CustomWheel is free, instant, and always will be. No sign-up needed — just open and spin!</p>
+      <div class="cta-btns">
+        <a href="#hero" class="btn btn-white">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Spin the Wheel Now
+        </a>
+        <a href="#wheel-types" class="btn btn-outline-white">Explore All Wheels</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FAQ SECTION
+     ============================================================ -->
+<section id="faq" aria-label="Frequently Asked Questions">
+  <div class="container">
+    <div class="faq-header reveal">
+      <div class="section-tag">❓ FAQ</div>
+      <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
+    </div>
+
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-q">Is CustomWheel completely free to use?</div>
+        <div class="faq-a">Yes! CustomWheel is 100% free with zero limitations. No account required, no ads, no premium tier. Just visit the site and start spinning immediately.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How do I add my own entries to the wheel?</div>
+        <div class="faq-a">Simply type your entry in the text box below the wheel and click "+ Add" or press Enter. Your entry is instantly added to the wheel. You can add unlimited entries and remove any at any time.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is the spin the wheel result truly random?</div>
+        <div class="faq-a">Absolutely. CustomWheel uses a high-quality random number generator combined with variable spin speed and duration to ensure every result is genuinely unpredictable. All entries have a proportionally equal chance of winning.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I use this as a classroom spinner for my students?</div>
+        <div class="faq-a">Yes! Our classroom spinner wheel is loved by teachers worldwide. Add your students' names and use it as a random student picker. It works great on smartboards, projectors, and desktop browsers.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Does CustomWheel work on phones and tablets?</div>
+        <div class="faq-a">Yes! Our digital wheel spinner is fully mobile-optimized. The wheel resizes beautifully to any screen size, and you can tap to spin. Works on iOS and Android browsers without any app download.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Are my entries saved or shared with anyone?</div>
+        <div class="faq-a">No. All your wheel entries are stored locally in your browser session only. We never collect, store, or share your data. When you close the tab, your entries are gone. Complete privacy guaranteed.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I use CustomWheel for giveaways and raffles?</div>
+        <div class="faq-a">Absolutely. Enter all participant names, then spin the wheel to pick a winner. You can even share your screen during a live stream so your audience sees the result in real time for full transparency.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How many entries can I add to the wheel?</div>
+        <div class="faq-a">There's no hard limit. You can add as many entries as you like. The wheel automatically adjusts the slice size to fit all entries. For very large lists (100+), we recommend grouping or using the giveaway preset.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER (Component) ===== -->
+<script src="js/footer.js" defer></script>
+
+<!-- ===== SCRIPTS ===== -->
+<script src="js/wheel.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
