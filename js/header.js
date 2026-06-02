@@ -28,17 +28,17 @@
       <a href="/#wheel-types">Wheel Types</a>
       <a href="/#how-it-works">How It Works</a>
       <a href="/#use-cases">Use Cases</a>
-      <a href="/#faq">FAQ</a>
-      <div class="header-cta">
+      <a href="/#faq">FAQ</a>      
+    </nav>
+    <div class="header-cta">
       <a href="/#hero" class="btn btn-primary">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        Spin Now — Free
+        Spin Now
       </a>
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
-    </nav>
 
     
   </div>
